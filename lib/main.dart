@@ -1,4 +1,4 @@
-import 'package:currency_app/view/home_screen.dart';
+import 'package:currency_app/view/layout_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const LayoutScreen(),
     );
   }
 }
