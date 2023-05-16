@@ -1,9 +1,7 @@
 import 'package:currency_app/core/components/app_constant/app_constant.dart';
 import 'package:currency_app/core/components/widgets/button_widget.dart';
 import 'package:currency_app/core/components/widgets/card_currency.dart';
-import 'package:currency_app/core/components/widgets/card_date_widget.dart';
 import 'package:currency_app/core/components/widgets/select_currrency_widget.dart';
-import 'package:currency_app/core/components/widgets/select_date_widget.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyDateSreen extends StatefulWidget {
