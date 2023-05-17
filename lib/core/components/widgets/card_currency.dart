@@ -22,6 +22,7 @@ class CardCurreny extends StatelessWidget {
                 title: Text(
                   "$nameCurreny",
                   style:const TextStyle(
+                    color: Colors.amber,
                       fontSize: 18, fontWeight: FontWeight.w700),
                 ),
                 subtitle: Text("$valueCurreny",

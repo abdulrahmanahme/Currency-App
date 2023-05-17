@@ -1,13 +1,13 @@
-import 'package:currency_app/view/home_screen.dart';
-import 'package:currency_app/view_model/home_states_states.dart';
+import 'package:currency_app/view/currency_convertion_screen.dart';
+import 'package:currency_app/view/currency_home_screen.dart';
+import 'package:currency_app/view_model/layout_view_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../view/currency_date_screen.dart';
-import '../view/currency_time_screen.dart';
+import '../../view/currency_time_screen.dart';
 
-class HomeViewModel extends Cubit<LayoutState> {
-  HomeViewModel() : super(InitialLayoutStatus());
-  static HomeViewModel get(context) => BlocProvider.of(context);
+class LayoutViewModel extends Cubit<LayoutState> {
+  LayoutViewModel() : super(InitialLayoutStatus());
+  static LayoutViewModel get(context) => BlocProvider.of(context);
   int counter = 0;
   String selectedOption = 'Option 1';
 
@@ -28,10 +28,9 @@ class HomeViewModel extends Cubit<LayoutState> {
   ];
 
   var currencyBody = const [
-    HomeScreen(),
+    CurrencyHomeScreen(),
     CurrencyTimeScreen(),
-
-    CurrencyDateSreen(),
+    CurrencyConversionSreen(),
   ];
   List<BottomNavigationBarItem> itemsBottom = const [
     BottomNavigationBarItem(

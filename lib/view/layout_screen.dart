@@ -1,7 +1,8 @@
-import 'package:currency_app/view_model/home_states_states.dart';
+// import 'package:currency_app/view_model/layout_view_model/layout_view_states.dart';
+import 'package:currency_app/view_model/layout_view_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../view_model/home_view_model.dart';
+import '../view_model/layout_view_model/layout_view_model.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});
@@ -9,11 +10,11 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeViewModel(),
-      child: BlocConsumer<HomeViewModel, LayoutState>(
+      create: (context) =>LayoutViewModel(),
+      child: BlocConsumer<LayoutViewModel, LayoutState>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = context.read<HomeViewModel>();
+            var cubit = context.read<LayoutViewModel>();
             return Scaffold(
               appBar: AppBar(
                 title: Text(

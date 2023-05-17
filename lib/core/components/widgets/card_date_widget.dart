@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CardDate extends StatelessWidget {
@@ -6,11 +5,9 @@ class CardDate extends StatelessWidget {
     super.key,
     this.textDate,
     this.textCurreny,
-    this.textValue
   });
-  final String ?textDate;
-  final String ?textCurreny;
-  final String ?textValue;
+  final String? textDate;
+  final MapEntry<String, Map<String, dynamic>>? textCurreny;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +17,6 @@ class CardDate extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
-        height: 200,
-        width: 350,
         child: Column(
           children: [
             Padding(
@@ -30,26 +25,40 @@ class CardDate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "$textCurreny",
-                    style:const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w700),
+                    "Range Date:   $textDate",
+                    style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "$textValue: $textDate",
-                    style:const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w700),
+            ListView.builder(
+              itemCount: textCurreny!.value.entries.length,
+              shrinkWrap: true,
+              primary: false,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: Colors.grey),
+                    ),
+                    title: Text(textCurreny!.value.entries
+                        .toList()[index]
+                        .key
+                        .toString()),
+                    subtitle: Text(textCurreny!.value.entries
+                        .toList()[index]
+                        .value
+                        .toString()),
                   ),
-                ],
-              ),
+                );
+              },
             ),
+            
           ],
         ),
       ),

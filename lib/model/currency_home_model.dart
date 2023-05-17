@@ -1,16 +1,16 @@
-class ExchangeRate {
+class CurrencyHomeModel {
    String? base;
    String ?date;
   Map<String, num> rates;
 
-  ExchangeRate({
+  CurrencyHomeModel ({
    this.base,
   this.date,
     required this.rates,
   });
 
-  factory ExchangeRate.fromJson({Map<String, dynamic>? json}) {
-  return ExchangeRate(
+  factory CurrencyHomeModel.fromJson({Map<String, dynamic>? json}) {
+  return CurrencyHomeModel(
       base: json!['base'],
       date: json['date'],
       rates: Map<String,num>.from( json['rates']),
@@ -18,3 +18,4 @@ class ExchangeRate {
     
   }
 }
+
