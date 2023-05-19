@@ -7,10 +7,12 @@ class CurrencyTimeViewModel extends Cubit<CurrencyTimeViewModelState> {
   CurrencyTimeViewModel() : super(InitialCurrencyTimeStatus());
   bool isLoading = true;
   CurrencyDateModel? currencyDateModel;
-  Future<CurrencyDateModel?> excute() async {
+   CurrencyApis? currencyApis;
+  
+  Future<CurrencyDateModel?> excute( {String ?startDate, String? endDate}) async {
     emit(LoadingCurrencyTimeStatus());
     isLoading = true;
-    currencyDateModel = await CurrencyApis.getCurrencyDate();
+    currencyDateModel = await CurrencyApis.getCurrencyDate(startDate:startDate ,endDate: endDate);
     emit(LoadedCurrencyTimeStatus());
     isLoading = false;
 

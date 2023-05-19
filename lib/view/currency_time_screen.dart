@@ -15,6 +15,17 @@ class CurrencyTimeScreen extends StatefulWidget {
 }
 
 class _CurrencyTimeScreenState extends State<CurrencyTimeScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+final formkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _controller2.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -26,56 +37,64 @@ class _CurrencyTimeScreenState extends State<CurrencyTimeScreen> {
 
               return Scaffold(
                 body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            height: 278,
-                            width: 350,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: const [
-                                    Text(
-                                      '  Year  Month  Day  ',
-                                      style: TextStyle(fontSize: 25),
+                  child: Form(
+                    key: formkey,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Container(
+                              height: 320,
+                              width: 350,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                 
+                                  SelectDateWidget(
+                                      controller: _controller,
+                                      controller2: _controller2,
+                                      validtion: 'Please add the start Date',
+                                       validtion2: 'Please add the end Date',
+                                      hintText: '2020-01-01',
+                                      hintText2: '2020-01-04',
+                                      textName: 'Start Date',
+                                      textName2: 'End Date'),
+                  
+                                  Padding(
+                                    padding: const EdgeInsets.all(9.0),
+                                    child: Button(
+                                      name: 'Get Rates',
+                                      onPressed: () {
+                                        if(formkey.currentState!.validate()){
+                                        cubit.excute(
+                                          startDate: _controller.text,
+                                          endDate: _controller2.text ,
+
+                                        );
+
+                                        }
+                                      },
                                     ),
-                                  ],
-                                ),
-                                const SelectDateWidget(
-                                    textName: 'Start Date :',
-                                    options: AppConstant.options,
-                                    selectvalue: AppConstant.selectedDay),
-                                const SelectDateWidget(
-                                    textName: 'Start End :',
-                                    options: AppConstant.options,
-                                    selectvalue: AppConstant.selectedDay),
-                                Button(
-                                  name: 'Get Rates',
-                                  onPressed: () {
-                                    cubit.excute();
-                                  },
-                                ),
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if (state is LoadedCurrencyTimeStatus)
-                        ...cubit.currencyDateModel!.rates.entries
-                            .map((e) => CardDate(
-                                  textCurreny: e,
-                                  textDate: e.key,
-                                ),),
-                    ],
+                        if (state is LoadedCurrencyTimeStatus)
+                          ...cubit.currencyDateModel!.rates.entries.map(
+                            (e) => CardDate(
+                              textCurreny: e,
+                              textDate: e.key,
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               );

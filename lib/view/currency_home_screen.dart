@@ -1,5 +1,6 @@
-import 'package:currency_app/core/components/widgets/button_widget.dart';
-import 'package:currency_app/core/components/widgets/card_currency.dart';
+import 'package:currency_app/core/components/widgets/card_home_widget.dart';
+import 'package:currency_app/model/currency_home_model.dart';
+import 'package:currency_app/repository/currencys_api_remote.dart';
 import 'package:currency_app/view_model/currency_home_screen/currency_home_view_mode_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +14,22 @@ class CurrencyHomeScreen extends StatefulWidget {
 }
 
 class _CurrencyHomeScreenState extends State<CurrencyHomeScreen> {
+  bool isLoading = true;
+  CurrencyApis? data;
+  CurrencyHomeModel? currencyHomeModel;
+
+  CurrencyApis? currencyApis;
 
   @override
   void initState() {
+    CurrencyApis.getCurrencyHome().then((value) => setState(() {
+          isLoading = false;
+          currencyHomeModel = value;
+        }));
+
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -25,50 +37,21 @@ class _CurrencyHomeScreenState extends State<CurrencyHomeScreen> {
       child: BlocConsumer<CurrencyHomeViewModel, CurrencyHomeViewModelState>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = context.read<CurrencyHomeViewModel>();
-
             return Scaffold(
-              body:
-
-                  //  cubit.isLoading   ? const Center(child: CircularProgressIndicator())
-                  //     :
-                  SingleChildScrollView(
-                child: Column(
-                  children: [
-           
-
-                    // ...data!.rates.entries
-                    //     .map((cur) => CardCurreny(
-                    //           nameCurreny: cur.key,
-                    //           valueCurreny: cur.value.toString(),
-                    //         ))
-                    //     .toList(),
-                    
-                    Button(
-                      name: 'Get Rates',
-                      onPressed: () {
-                        cubit.excute();
-                      },
+              body: isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ...currencyHomeModel!.rates!.entries
+                              .map((cur) => CardHome(
+                                    nameCurreny: cur.key,
+                                    valueCurreny: cur.value.toString(),
+                                  ))
+                              .toList(),
+                        ],
+                      ),
                     ),
-                    if (state is LoadingCurrencyHomeStatus)
-                      cubit.isLoading
-                          ? const Center(child: CircularProgressIndicator())
-                          : CardCurreny(
-                              nameCurreny:
-                                  cubit.currencyConversionModel!.query.from,
-                              valueCurreny:
-                                  cubit.currencyConversionModel!.query.to,
-                            )
-
-                    //  ...currencyCompare!.query.
-                    //     .map((cur) => CardCurreny(
-                    //           nameCurreny: cur.key,
-                    //           valueCurreny: cur.value.toString(),
-                    //         ))
-                    //     .toList(),
-                  ],
-                ),
-              ),
             );
           }),
     );

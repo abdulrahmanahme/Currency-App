@@ -1,12 +1,12 @@
 class CurrencyHomeModel {
    String? base;
    String ?date;
-  Map<String, num> rates;
+  Map<String, num>? rates;
 
   CurrencyHomeModel ({
    this.base,
   this.date,
-    required this.rates,
+    this.rates,
   });
 
   factory CurrencyHomeModel.fromJson({Map<String, dynamic>? json}) {

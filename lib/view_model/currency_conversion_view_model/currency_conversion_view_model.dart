@@ -6,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CurrencyConversionViewModel extends Cubit<CurrencyConversionViewModelState> {
   CurrencyConversionViewModel() : super(InitialCurrencyConversionStatus());
    bool isLoading = true;
+   CurrencyApis? currencyApis;
+
    CurrencyConversionModel? currencyConversionModel;
-   Future<CurrencyConversionModel?>excute()async{
+   Future<CurrencyConversionModel?>excute({String ?baseCurrency, String? secondCurrency})async{
     emit(LoadingCurrencyConversionStatus());
     isLoading = true;
-    currencyConversionModel =await CurrencyApis.getCurrencyConvertion();
+    currencyConversionModel =await CurrencyApis.getCurrencyConvertion(baseCurrency:baseCurrency ,secondCurrency: secondCurrency,);
     emit(LoadedCurrencyConversionStatus());
     isLoading = false;
 return currencyConversionModel;

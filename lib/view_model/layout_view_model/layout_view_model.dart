@@ -29,6 +29,7 @@ class LayoutViewModel extends Cubit<LayoutState> {
 
   var currencyBody = const [
     CurrencyHomeScreen(),
+    //  LazyLoading(),
     CurrencyTimeScreen(),
     CurrencyConversionSreen(),
   ];
