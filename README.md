@@ -14,7 +14,7 @@ enter it like this
 - end date 2020-01-04
 - you should enter the currency base like this
 - from USD to EUR to get the data
-- and wait for the data to lood
+- and wait for the data to loading
 
 
 # How to run testing 
