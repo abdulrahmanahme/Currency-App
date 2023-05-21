@@ -8,6 +8,15 @@ Currency App
 # How to run the app
 - Clone the project 
 - get packages
+- how to input the data you should
+enter it like this 
+- start date 2020-01-01 
+- end date 2020-01-04
+- you should enter the currency base like this
+- from USD to EUR to get the data
+- and wait for the data to lood
+
+
 # How to run testing 
 - go to file test and open repository file and run test file
  
